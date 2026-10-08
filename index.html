@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Chibouk Fighting</title>
+  <meta name="description" content="Chibouk Fighting : combat de ring 3D dans le navigateur.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E%3Crect width=%2264%22 height=%2264%22 rx=%2212%22 fill=%22%2307080c%22/%3E%3Ctext x=%2232%22 y=%2246%22 font-size=%2238%22 text-anchor=%22middle%22 font-family=%22Impact,sans-serif%22 fill=%22%23ffd23f%22%3ECF%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script type="importmap">
+    { "imports": { "three": "./lib/three.module.js", "three/addons/": "./lib/addons/" } }
+  </script>
+</head>
+<body>
+  <canvas id="c"></canvas>
+  <div id="fxlayer"></div>
+  <div id="fade"></div>
+
+  <!-- Chargement -->
+  <div id="loading">
+    <div class="logo">CHIBOUK <span>FIGHTING</span></div>
+    <div class="bar"><div id="loadbar"></div></div>
+    <div id="loadtext">Chargement des combattants…</div>
+  </div>
+
+  <!-- Menu -->
+  <div id="menu" class="overlay hidden">
+    <div class="panel">
+      <header>
+        <div class="logo">CHIBOUK <span>FIGHTING</span></div>
+        <p class="sub">Choisissez vos combattants, réglez le match, et que le meilleur gagne.</p>
+      </header>
+      <nav id="tabs"></nav>
+      <div id="tabbody"></div>
+      <div id="menuhelp" class="help"></div>
+      <footer>
+        <button id="reset" type="button" class="ghost">Réglages par défaut</button>
+        <button id="start" type="button" class="primary">Lancer le combat</button>
+      </footer>
+    </div>
+  </div>
+
+  <!-- HUD -->
+  <div id="hud" hidden>
+    <div class="top">
+      <div class="side s1">
+        <div class="who"><img id="pf1" class="pf" alt=""><div class="name" id="n1">LOUIS</div></div>
+        <div class="hp"><div class="trail" id="tr1"></div><div class="fill" id="hp1"></div></div>
+        <div class="wins" id="w1"></div>
+        <div class="combo" id="combo1"></div>
+      </div>
+      <div class="mid">
+        <div id="timer">60</div>
+        <div id="roundlbl">ROUND 1</div>
+      </div>
+      <div class="side s2">
+        <div class="who"><div class="name" id="n2">NIELS</div><img id="pf2" class="pf" alt=""></div>
+        <div class="hp"><div class="trail" id="tr2"></div><div class="fill" id="hp2"></div></div>
+        <div class="wins" id="w2"></div>
+        <div class="combo" id="combo2"></div>
+      </div>
+    </div>
+    <div id="announce"></div>
+    <div id="toast"></div>
+    <div class="bottom">
+      <div id="hudhelp" class="help"></div>
+      <div class="btns">
+        <button id="btn-rain" type="button" title="Pluie d'objets (O)">Objets</button>
+        <button id="btn-cam" type="button" title="Changer de caméra (C)">Caméra</button>
+        <button id="btn-pause" type="button" title="Pause (Échap)">Pause</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contrôles tactiles -->
+  <div id="touch" hidden>
+    <div class="stick"><div class="knob"></div></div>
+    <div class="tbtns">
+      <button class="t-dodge" type="button">ESQ.</button>
+      <button class="t-kick" type="button">PIED</button>
+      <button class="t-upper" type="button">UPPER</button>
+      <button class="t-punch" type="button">POING</button>
+    </div>
+  </div>
+
+  <!-- Pause -->
+  <div id="pause" class="overlay hidden">
+    <div class="panel small">
+      <div class="logo">PAUSE</div>
+      <button id="p-resume" type="button" class="primary">Reprendre</button>
+      <button id="p-restart" type="button">Recommencer le match</button>
+      <button id="p-menu" type="button" class="ghost">Retour au menu</button>
+    </div>
+  </div>
+
+  <!-- Résultats -->
+  <div id="results" class="overlay hidden">
+    <div class="panel small">
+      <img id="res-pf" class="res-pf" alt="">
+      <div class="logo" id="res-title">Victoire</div>
+      <div id="res-score">2 – 1</div>
+      <table id="res-table"></table>
+      <button id="r-again" type="button" class="primary">Revanche</button>
+      <button id="r-menu" type="button" class="ghost">Menu &amp; réglages</button>
+    </div>
+  </div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
