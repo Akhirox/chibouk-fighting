@@ -139,9 +139,12 @@ export class Fighter {
     this.actions.idle.play();
     this.mixer.update(0);
     this.model.updateMatrixWorld(true);
-    this.mesh.computeBoundingBox();
-    const box = new THREE.Box3().setFromObject(this.model);
-    this.model.position.y -= box.min.y;
+    // point le plus bas du maillage *animé* (squelette à jour), pas de la pose de liaison
+    this.mesh.skeleton.update();
+    const v = new THREE.Vector3(), n = this.mesh.geometry.attributes.position.count;
+    let minY = Infinity;
+    for (let i = 0; i < n; i += 2) { this.mesh.getVertexPosition(i, v); v.applyMatrix4(this.mesh.matrixWorld); if (v.y < minY) minY = v.y; }
+    this.model.position.y -= minY;
     this.current = 'idle';
 
     this.vel = new THREE.Vector3();

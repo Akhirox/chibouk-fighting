@@ -699,7 +699,7 @@ frame();
 
 // Accès debug depuis la console
 window.LFC = {
-  G, fighters: () => fighters, settings, physics, startMatch, showMenu, arena, camera, controls, arenaReady: () => !!arena.crowd,
+  G, fighters: () => fighters, settings, physics, startMatch, showMenu, arena, camera, controls, arenaReady: () => !!arena.crowd, refresh: () => refreshFighters(), THREE,
   // simulation accélérée (tests) : avance de n secondes sans rendu
   sim(seconds, step = 1 / 30) { simulating = true; for (let t = 0; t < seconds; t += step) tick(step); simulating = false; },
 };
